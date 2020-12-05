@@ -59,6 +59,15 @@
                 <a class="nav-link" href="javascript:void(0)"><i class="fas fa-file-alt"></i>
                     <span>{{ __('Cetak Laporan') }}</span></a>
             </li>
+            <li class="menu-header">{{ __('Pengaturan') }}</li>
+            <li>
+                <a href="{{ route('home') }}" class="nav-link"><i
+                        class="fas fa-fire"></i><span>{{ __('Harga') }}</span></a>
+            </li>
+            <li>
+                <a href="{{ route('home') }}" class="nav-link"><i
+                        class="fas fa-fire"></i><span>{{ __('System') }}</span></a>
+            </li>
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

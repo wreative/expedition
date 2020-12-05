@@ -22,6 +22,18 @@ class TypeSeeder extends Seeder
             [
                 'id' => '2',
                 'name' => 'Dokumen'
+            ],
+            [
+                'id' => '3',
+                'name' => 'Parcel'
+            ],
+            [
+                'id' => '4',
+                'name' => 'Makanan'
+            ],
+            [
+                'id' => '5',
+                'name' => 'Kue Tart'
             ]
         ]);
     }
