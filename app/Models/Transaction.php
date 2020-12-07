@@ -30,11 +30,11 @@ class Transaction extends Model
 
     public function relationStatus()
     {
-        return $this->belongsTo('App\Models\Status', 'id', 'status');
+        return $this->belongsTo('App\Models\Status', 'status', 'id');
     }
 
     public function relationTracking()
     {
-        return $this->belongsTo('App\Models\Tracking', 'id', 'track');
+        return $this->belongsTo('App\Models\Tracking', 'track', 'id');
     }
 }

@@ -32,21 +32,36 @@ class Resi extends Model
 
     public function relationTransaction()
     {
-        return $this->hasOne('App\Models\Transaction', 'id', 'transaction');
+        return $this->belongsTo('App\Models\Transaction', 'transaction', 'id');
     }
 
     public function relationDetailed()
     {
-        return $this->hasOne('App\Models\Detailed', 'id', 'price');
+        return $this->belongsTo('App\Models\Detailed', 'detailed', 'id');
     }
 
     public function relationPrice()
     {
-        return $this->hasOne('App\Models\Transaction', 'id', 'price');
+        return $this->belongsTo('App\Models\Price', 'price', 'id');
     }
 
-    public function wilayah()
+    public function relationPayment()
     {
-        return $this->belongsTo('App\Models\Wilayah', 'id', 'destination');
+        return $this->belongsTo('App\Models\Payment', 'payment', 'id');
+    }
+
+    public function relationService()
+    {
+        return $this->belongsTo('App\Models\Service', 'service', 'id');
+    }
+
+    public function relationType()
+    {
+        return $this->belongsTo('App\Models\Type', 'jb', 'id');
+    }
+
+    public function relationWilayah()
+    {
+        return $this->belongsTo('App\Models\Wilayah', 'destination', 'id');
     }
 }
