@@ -90,21 +90,24 @@ Route::get('/agen/reset/{id}', [App\Http\Controllers\AgenController::class, 'res
 // Pengaturan
 
 // Pengiriman
-Route::get('/settings/delivery', [App\Http\Controllers\SettingsController::class, 'delivery']);
+Route::get('/settings/delivery', [App\Http\Controllers\SettingsController::class, 'delivery'])
+    ->name('settingsDelivery');
 Route::put(
     '/settings/delivery/update/{id}',
     [App\Http\Controllers\SettingsController::class, 'deliveryUpdate']
 );
 
 // Jenis Barang
-Route::get('/settings/type', [App\Http\Controllers\SettingsController::class, 'type']);
+Route::get('/settings/type', [App\Http\Controllers\SettingsController::class, 'type'])
+    ->name('settingsType');
 Route::put(
     '/settings/type/update/{id}',
     [App\Http\Controllers\SettingsController::class, 'typeUpdate']
 );
 
 // Pembayaran
-Route::get('/settings/payment', [App\Http\Controllers\SettingsController::class, 'payment']);
+Route::get('/settings/payment', [App\Http\Controllers\SettingsController::class, 'payment'])
+    ->name('settingsPayment');
 Route::put(
     '/settings/payment/update/{id}',
     [App\Http\Controllers\SettingsController::class, 'paymentUpdate']
