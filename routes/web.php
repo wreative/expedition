@@ -86,3 +86,37 @@ Route::post('/agen/store', [App\Http\Controllers\AgenController::class, 'store']
 Route::get('/agen/edit/{id}', [App\Http\Controllers\AgenController::class, 'edit']);
 Route::put('/agen/update/{id}', [App\Http\Controllers\AgenController::class, 'update']);
 Route::get('/agen/reset/{id}', [App\Http\Controllers\AgenController::class, 'reset']);
+
+// Pengaturan
+
+// Pengiriman
+Route::get('/settings/delivery', [App\Http\Controllers\SettingsController::class, 'delivery']);
+Route::put(
+    '/settings/delivery/update/{id}',
+    [App\Http\Controllers\SettingsController::class, 'deliveryUpdate']
+);
+
+// Jenis Barang
+Route::get('/settings/type', [App\Http\Controllers\SettingsController::class, 'type']);
+Route::put(
+    '/settings/type/update/{id}',
+    [App\Http\Controllers\SettingsController::class, 'typeUpdate']
+);
+
+// Pembayaran
+Route::get('/settings/payment', [App\Http\Controllers\SettingsController::class, 'payment']);
+Route::put(
+    '/settings/payment/update/{id}',
+    [App\Http\Controllers\SettingsController::class, 'paymentUpdate']
+);
+
+// Harga
+Route::get('/settings/price', [App\Http\Controllers\SettingsController::class, 'price']);
+Route::put(
+    '/settings/price/update/{id}',
+    [App\Http\Controllers\SettingsController::class, 'priceUpdate']
+);
+
+// System
+Route::get('/Settings/edit/{id}', [App\Http\Controllers\SettingsController::class, 'edit']);
+Route::put('/Settings/update/{id}', [App\Http\Controllers\SettingsController::class, 'update']);
