@@ -87,7 +87,7 @@ Route::get('/agen/edit/{id}', [App\Http\Controllers\AgenController::class, 'edit
 Route::put('/agen/update/{id}', [App\Http\Controllers\AgenController::class, 'update']);
 Route::get('/agen/reset/{id}', [App\Http\Controllers\AgenController::class, 'reset']);
 
-// Pengaturan
+// Pengaturan //
 
 // Pengiriman
 Route::get('/settings/delivery', [App\Http\Controllers\SettingsController::class, 'delivery'])
@@ -98,12 +98,13 @@ Route::put(
 );
 
 // Jenis Barang
-Route::get('/settings/type', [App\Http\Controllers\SettingsController::class, 'type'])
+Route::get('/type', [App\Http\Controllers\TypeController::class, 'index'])
     ->name('settingsType');
-Route::put(
-    '/settings/type/update/{id}',
-    [App\Http\Controllers\SettingsController::class, 'typeUpdate']
-);
+Route::get('/type/create', [App\Http\Controllers\TypeController::class, 'create'])
+    ->name('createType');
+Route::post('/type/store', [App\Http\Controllers\TypeController::class, 'store'])
+    ->name('storeType');
+Route::put('/type/update/{id}', [App\Http\Controllers\TypeController::class, 'update']);
 
 // Pembayaran
 Route::get('/settings/payment', [App\Http\Controllers\SettingsController::class, 'payment'])
