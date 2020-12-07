@@ -89,14 +89,6 @@ Route::get('/agen/reset/{id}', [App\Http\Controllers\AgenController::class, 'res
 
 // Pengaturan //
 
-// Pengiriman
-Route::get('/settings/delivery', [App\Http\Controllers\SettingsController::class, 'delivery'])
-    ->name('settingsDelivery');
-Route::put(
-    '/settings/delivery/update/{id}',
-    [App\Http\Controllers\SettingsController::class, 'deliveryUpdate']
-);
-
 // Jenis Barang
 Route::get('/type', [App\Http\Controllers\TypeController::class, 'index'])
     ->name('settingsType');
@@ -104,15 +96,9 @@ Route::get('/type/create', [App\Http\Controllers\TypeController::class, 'create'
     ->name('createType');
 Route::post('/type/store', [App\Http\Controllers\TypeController::class, 'store'])
     ->name('storeType');
+Route::get('/type/edit/{id}', [App\Http\Controllers\TypeController::class, 'edit']);
 Route::put('/type/update/{id}', [App\Http\Controllers\TypeController::class, 'update']);
-
-// Pembayaran
-Route::get('/settings/payment', [App\Http\Controllers\SettingsController::class, 'payment'])
-    ->name('settingsPayment');
-Route::put(
-    '/settings/payment/update/{id}',
-    [App\Http\Controllers\SettingsController::class, 'paymentUpdate']
-);
+Route::get('/type/delete/{id}', [App\Http\Controllers\TypeController::class, 'delete']);
 
 // Harga
 Route::get('/settings/price', [App\Http\Controllers\SettingsController::class, 'price']);

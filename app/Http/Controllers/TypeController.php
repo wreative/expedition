@@ -45,4 +45,29 @@ class TypeController extends Controller
 
         return redirect()->route('settingsType');
     }
+
+    public function delete($id)
+    {
+        $tipe = Type::find($id);
+        $tipe->delete();
+        return redirect()->route('settingsType');
+    }
+
+    public function edit($id)
+    {
+        $tipe = Type::find($id);
+        return view('pages.backend.settings.jenis.updateJenis', ['tipe' => $tipe]);
+    }
+
+    public function update($id, Request $req)
+    {
+        $this->validate($req, [
+            'name' => 'required',
+        ]);
+
+        $tipe = Type::find($id);
+        $tipe->name = $req->name;
+        $tipe->save();
+        return redirect()->route('settingsType');
+    }
 }

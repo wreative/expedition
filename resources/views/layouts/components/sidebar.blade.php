@@ -71,19 +71,9 @@
                 </a>
             </li>
             <li class="menu-header">{{ __('Pengaturan') }}</li>
-            <li class="{{ Request::route()->getName() == 'settingsDelivery' ? 'active' : '' }}">
-                <a href="{{ route('settingsDelivery') }}" class="nav-link">
-                    <i class="fas fa-paper-plane"></i><span>{{ __('Pengiriman') }}</span>
-                </a>
-            </li>
             <li class="{{ Request::route()->getName() == 'settingsType' ? 'active' : '' }}">
                 <a href="{{ route('settingsType') }}" class="nav-link">
                     <i class="fas fa-list"></i><span>{{ __('Jenis Barang') }}</span>
-                </a>
-            </li>
-            <li class="{{ Request::route()->getName() == 'settingsPayment' ? 'active' : '' }}">
-                <a href="{{ route('settingsPayment') }}" class="nav-link">
-                    <i class="fas fa-hand-holding-usd"></i><span>{{ __('Pembayaran') }}</span>
                 </a>
             </li>
             <li class="{{ Request::route()->getName() == 'home' ? 'active' : '' }}">

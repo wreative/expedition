@@ -32,8 +32,13 @@
                         </td>
                         <td>{{ $t->name }}</td>
                         <td>
-                            <a href="/agen/edit/{{ $t->id }}" class="btn btn-primary btn-action mb-1 mt-1 mr-1"
+                            <a href="/type/edit/{{ $t->id }}" class="btn btn-primary btn-action mb-1 mt-1 mr-1"
                                 data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                            <a class="btn btn-danger btn-action mb-1 mt-1" style="cursor: pointer" data-toggle="tooltip"
+                                title="Delete"
+                                data-confirm="Apakah Anda Yakin?|Aksi ini tidak dapat dikembalikan. Apakah ingin melanjutkan?"
+                                data-confirm-yes="window.open('/type/delete/{{ $t->id }}','_self')"><i
+                                    class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach

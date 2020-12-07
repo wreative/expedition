@@ -277,16 +277,27 @@
             <div class="card card-body">
                 <div class="form-group">
                     <label class="form-label">{{ __('Jenis Barang') }}</label>
-                    <div class="selectgroup w-100">
+                    <select class="form-control select2" name="jb">
+                        @foreach ($tipe as $t)
+                        <option value="{{ $t->id }}">{{ $t->name}}</option>
+                        @endforeach
+                    </select>
+                    {{-- <div class="selectgroup w-100">
+                        @foreach ($tipe as $t)
                         <label class="selectgroup-item">
+                            <input type="radio" name="jb" value="{{ $t->id }}" class="selectgroup-input">
+                    <span class="selectgroup-button">{{ $t->name }}</span>
+                    </label>
+                    @endforeach --}}
+                    {{-- <label class="selectgroup-item">
                             <input type="radio" name="jb" value="1" class="selectgroup-input" checked>
                             <span class="selectgroup-button">{{ __('Paket') }}</span>
-                        </label>
-                        <label class="selectgroup-item">
-                            <input type="radio" name="jb" value="2" class="selectgroup-input">
-                            <span class="selectgroup-button">{{ __('Dokumen') }}</span>
-                        </label>
-                    </div>
+                    </label>
+                    <label class="selectgroup-item">
+                        <input type="radio" name="jb" value="2" class="selectgroup-input">
+                        <span class="selectgroup-button">{{ __('Dokumen') }}</span>
+                    </label> --}}
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

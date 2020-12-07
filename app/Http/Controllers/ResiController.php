@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Agen;
 use App\Models\Detailed;
 use App\Models\Transaction;
+use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -41,8 +42,9 @@ class ResiController extends Controller
         }
 
         $wilayah = Wilayah::all();
+        $tipe = Type::all();
         $kode = $this->getResi();
-        return view('pages.backend.data.inputData', compact('kode', 'wilayah', 'agen'));
+        return view('pages.backend.data.inputData', ['kode' => $kode, 'wilayah' => $wilayah, 'agen' => $agen, 'tipe' => $tipe]);
     }
 
     public function getResi()
