@@ -55,4 +55,7 @@
             @enderror
         </div>
     </div>
+    <div class="card-footer bg-whitesmoke text-md-right">
+        <button class="btn btn-primary">{{ __('Selanjutnya') }}</button>
+    </div>
 </div>

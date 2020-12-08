@@ -37,6 +37,14 @@ Route::get('/input', [App\Http\Controllers\InputController::class, 'index'])
     ->name('inputData');
 Route::post('/store', [App\Http\Controllers\InputController::class, 'store'])
     ->name('store');
+Route::get('/input/step2', [App\Http\Controllers\InputController::class, 'index2'])
+    ->name('inputData2');
+Route::post('/store/step2', [App\Http\Controllers\InputController::class, 'store2'])
+    ->name('store2');
+Route::get('/input/step3', [App\Http\Controllers\InputController::class, 'index3'])
+    ->name('inputData3');
+Route::post('/store/step3', [App\Http\Controllers\InputController::class, 'store3'])
+    ->name('store3');
 Route::get('/output-resi', [App\Http\Controllers\InputController::class, 'successResi'])
     ->name('outResi');
 
