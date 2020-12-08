@@ -36,10 +36,10 @@ $(function() {
         var lebar = parseInt($("#lebar").val()) || 0;
         var tinggi = parseInt($("#tinggi").val()) || 0;
         $("#tdl").val(
-            numberWithCommas(Math.floor((panjang * lebar * tinggi) / 4000))
+            numberWithCommas(Math.round((panjang * lebar * tinggi) / 4000))
         );
         $("#tu").val(
-            numberWithCommas(Math.floor((panjang * lebar * tinggi) / 6000))
+            numberWithCommas(Math.round((panjang * lebar * tinggi) / 6000))
         );
     });
 });

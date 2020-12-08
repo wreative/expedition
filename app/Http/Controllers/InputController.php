@@ -59,8 +59,10 @@ class InputController extends Controller
         }
         // $count = $this->model->user()->where('kode', 'like', 'ADM%')->count();
         $count = DB::table('resi')->count() + 1;
-        // TanggalBulanTahun NomorBarangCodeAreaCodeAgenCodeKota
-        $kode = date("dmy") . " " . str_pad($count, 7, '0', STR_PAD_LEFT) . "CA" . $noAgen . "CKO";
+        // TODO TanggalBulanTahun NomorBarangCodeAreaCodeAgenCodeKota        
+
+        $kode = date("dmy") . " " . str_pad($count, 7, '0', STR_PAD_LEFT) . $noAgen . "CKO";
+        // TanggalBulanTahun NomorBarangCodeAgenCodeKota
         return $kode;
     }
 
