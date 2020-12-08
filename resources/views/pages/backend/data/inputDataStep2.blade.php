@@ -10,7 +10,7 @@
 @include('pages.backend.data.components.wizard')
 <form method="POST" action="{{ route('store2') }}">
     @csrf
-
+    <input type="hidden" value="{{ $sender_name }}">
 </form>
 @endsection
 @section('script')
