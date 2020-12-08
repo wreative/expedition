@@ -33,11 +33,11 @@ Route::get('/result', [App\Http\Controllers\ResiController::class, 'result'])
     ->name('result');
 
 // Input Data
-Route::get('/input', [App\Http\Controllers\ResiController::class, 'index'])
+Route::get('/input', [App\Http\Controllers\InputController::class, 'index'])
     ->name('inputData');
-Route::post('/store', [App\Http\Controllers\ResiController::class, 'store'])
+Route::post('/store', [App\Http\Controllers\InputController::class, 'store'])
     ->name('store');
-Route::get('/output-resi', [App\Http\Controllers\ResiController::class, 'successResi'])
+Route::get('/output-resi', [App\Http\Controllers\InputController::class, 'successResi'])
     ->name('outResi');
 
 // User
@@ -50,7 +50,7 @@ Route::post('/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class
 
 
 // Resi
-Route::get('/resi', [App\Http\Controllers\ResiController::class, 'resi'])
+Route::get('/resi', [App\Http\Controllers\ResiController::class, 'index'])
     ->name('masterResi');
 
 // Transaksi

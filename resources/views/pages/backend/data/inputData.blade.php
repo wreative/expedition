@@ -22,7 +22,7 @@
                 <i class="fas fa-list-alt"></i>
             </div>
             <div class="wizard-step-label">
-                {{ __('Informasi Detail') }}
+                {{ __('Informasi Tambahan') }}
             </div>
         </div>
         <div class="wizard-step">
