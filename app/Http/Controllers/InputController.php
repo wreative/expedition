@@ -72,11 +72,8 @@ class InputController extends Controller
         if ($req->bk == "Pilih kota tujuan terlebih dahulu!") {
             return redirect()->route('inputData')->with(['total' => 'Pilih kota terlebih dahulu!']);
         }
-        $vdl = str_replace(',', '', $req->tdl);
-        $vu = str_replace(',', '', $req->tdl);
-        $weight = str_replace(',', '', $req->tdl);
+
         $bk = str_replace(',', '', $req->bk);
-        $tb = str_replace(',', '', $req->tb);
         $count = DB::table('resi')->count() + 1;
         $resi = $req->resi;
 
@@ -88,10 +85,6 @@ class InputController extends Controller
         $replaced = Str::replaceLast('CA', $codeArea, $resi);
         $resi = Str::replaceLast('CKO', $codeKota, $replaced);
 
-
-        // dd($req->resi);
-        // dd($req->berat);
-        // dd($req->amount);
         $this->validate($req, [
             'sender_name' => 'required',
             'sender_tlp' => 'required',
@@ -147,10 +140,10 @@ class InputController extends Controller
             'b_po' => '0',
             'b_pa' => '0',
             'b_l' => '0',
-            't_b' => $tb,
-            'vol_dl' => $vdl,
-            'vol_u' => $vu,
-            'weight' => $weight,
+            't_b' => $this->removeComma($req->tb),
+            'vol_dl' => $this->removeComma($req->tdl),
+            'vol_u' => $this->removeComma($req->tu),
+            'weight' => $this->removeComma($req->berat),
             'amount' => $req->amount
         ]);
 
@@ -192,5 +185,10 @@ class InputController extends Controller
             // dd($check);
         } while ($check != null);
         return $random;
+    }
+
+    public function removeComma($number)
+    {
+        return str_replace(',', '', $number);
     }
 }

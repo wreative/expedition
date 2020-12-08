@@ -37,9 +37,9 @@
                             <a href="{{ asset(DNS2D::getBarcodePNGPath($t->nomor, 'QRCODE', 10, 10)) }}"
                                 class="btn btn-info btn-action mb-1 mt-1 mr-1" data-toggle="tooltip"
                                 title="Tampilkan Resi 2 Dimensi" id="resi">{{ __('Resi 2D') }}</a>
-                            <a href="{{ asset(DNS1D::getBarcodePNGPath($t->nomor, 'C39+', 1, 40)) }}"
-                                class="btn btn-info btn-action mb-1 mt-1 mr-1" data-toggle="tooltip"
-                                title="Tampilkan Resi 1 Dimensi" id="resi">{{ __('Resi 1D') }}</a>
+                            {{-- <a href="{{ asset(DNS1D::getBarcodePNGPath($t->nomor, 'C39+', 1, 40)) }}"
+                            class="btn btn-info btn-action mb-1 mt-1 mr-1" data-toggle="tooltip"
+                            title="Tampilkan Resi 1 Dimensi" id="resi">{{ __('Resi 1D') }}</a> --}}
                         </td>
                     </tr>
                     @endforeach
