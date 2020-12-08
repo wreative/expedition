@@ -16,7 +16,7 @@ class CreateDocument extends Migration
         Schema::create('dokumen', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('retail');
-            $table->bigInteger('borongan');
+            $table->bigInteger('kuantitas');
             $table->string('wilayah_id');
         });
     }

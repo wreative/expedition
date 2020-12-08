@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Previleges;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +21,11 @@ class DatabaseSeeder extends Seeder
             PrevilegesSeeder::class,
             AgenSeeder::class,
             StatusSeeder::class,
-            TrackingSeeder::class
+            TrackingSeeder::class,
+            WilayahSeeder::class,
+            DocumentSeeder::class,
+            PackageSeeder::class,
+            ParcelSeeder::class
         ]);
     }
 }

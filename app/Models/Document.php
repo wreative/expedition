@@ -19,7 +19,7 @@ class Document extends Model
 
     protected $fillable = [
         'retail',
-        'borongan',
+        'kuantitas',
         'wilayah_id'
     ];
 
