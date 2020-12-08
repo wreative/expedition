@@ -43,7 +43,6 @@
         <div class="form-group">
             <label>{{ __('Kota Tujuan') }}</label>
             <select class="form-control select2" name="destination" id="destination">
-                <option>{{ __('Kota') }}</option>
                 @foreach ($wilayah as $w)
                 <option value="{{ $w->price }}">{{ $w->name}}</option>
                 @endforeach

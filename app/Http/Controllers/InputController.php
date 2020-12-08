@@ -106,6 +106,14 @@ class InputController extends Controller
             return redirect('/input')->with(['status' => 'Jumlah tidak boleh kosong']);
         }
 
+        // Calculate
+        $vol_darat = round($this->removeComma(($req->panjang * $req->lebar * $req->tinggi) / 4000));
+        $vol_udara = round($this->removeComma(($req->panjang * $req->lebar * $req->tinggi) / 6000));
+
+        $biaya = $vol_darat < $req->berat ? $req->berat : $vol_darat;
+
+
+        // Input Data
         Resi::create([
             'transaction' => 'sad',
             'nomor' => $resi,
@@ -133,7 +141,7 @@ class InputController extends Controller
         ]);
 
         Price::create([
-            'b_k' => $bk,
+            'b_k' => $this->removeComma($req->bk),
             // 'b_po' => $req->bpo,
             // 'b_pa' => $req->bpa,
             // 'b_l' => $req->bl,
@@ -141,8 +149,8 @@ class InputController extends Controller
             'b_pa' => '0',
             'b_l' => '0',
             't_b' => $this->removeComma($req->tb),
-            'vol_dl' => $this->removeComma($req->tdl),
-            'vol_u' => $this->removeComma($req->tu),
+            'vol_dl' => $vol_darat,
+            'vol_u' => $vol_udara,
             'weight' => $this->removeComma($req->berat),
             'amount' => $req->amount
         ]);
@@ -190,5 +198,9 @@ class InputController extends Controller
     public function removeComma($number)
     {
         return str_replace(',', '', $number);
+    }
+
+    public function shippingCost()
+    {
     }
 }
