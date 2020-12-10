@@ -1,9 +1,9 @@
 "use strict";
 
-var cleave = new Cleave(".satuan", {
-    numeral: true,
-    numeralThousandsGroupStyle: "thousand"
-});
+// var cleave = new Cleave(".satuan", {
+//     numeral: true,
+//     numeralThousandsGroupStyle: "thousand"
+// });
 
 $(".tlp")
     .toArray()

@@ -159,35 +159,65 @@ class InputController extends Controller
         //         'codeArea' => $codeArea,
         //         'codeKota' => $codeKota
         //     ]);
-        // return Redirect::route('inputData2')->with([
-        //     'sender_name' => $req->sender_name,
-        //     'sender_tlp' => $req->sender_tlp,
-        //     'sender_addr' => $req->sender_addr,
-        //     'receiver_name' => $req->receiver_name,
-        //     'receiver_tlp' => $req->receiver_tlp,
-        //     'receiver_addr' => $req->receiver_addr,
-        //     'office_addr' => $req->office_addr,
-        //     'office_tlp' => $req->office_tlp,
-        //     'office_pst' => $req->office_pst,
-        //     'note' => $req->note,
-        //     'payment' => $req->payment,
-        //     'service' => $req->service,
-        //     'destination' => $req->destination,
-        //     'vol_darat' => $vol_darat,
-        //     'vol_udara' => $vol_udara,
-        //     'berat' => $berat
-        // ]);
+
+        if ($req->jb == '1') {
+        }
+
+        $status = $req->jb == '2' ? 'doc' : ($req->jb == '3' ? 'par' : '');
+
+        return Redirect::route('inputData2')->with([
+            'sender_name' => $req->sender_name,
+            'sender_tlp' => $req->sender_tlp,
+            'sender_addr' => $req->sender_addr,
+            'receiver_name' => $req->receiver_name,
+            'receiver_tlp' => $req->receiver_tlp,
+            'receiver_addr' => $req->receiver_addr,
+            'office_addr' => $req->office_addr,
+            'office_tlp' => $req->office_tlp,
+            'office_pst' => $req->office_pst,
+            'note' => $req->note,
+            'vol_darat' => $vol_darat,
+            'vol_udara' => $vol_udara,
+            // 'berat' => $berat,
+            // 'amount' => $req->amount,
+            'jb' => $req->jb,
+            'service' => $req->service,
+            'payment' => $req->payment,
+            'destination' => $req->destination,
+            // Has Status
+            'jenis' => $status
+        ]);
         // return view('pages.backend.data.inputDataStep2', compact($req->sender_name));
     }
 
-    public function input2(Request $req)
+    public function store2(Request $req)
     {
-        Redirect::route('inputData3')->with([]);
+        $this->validate($req, [
+            'sender_name' => 'required',
+            'sender_tlp' => 'required',
+            'sender_addr' => 'required',
+            'receiver_name' => 'required',
+            'receiver_tlp' => 'required',
+            'receiver_addr' => 'required',
+            'office_addr' => 'required',
+            'office_tlp' => 'required',
+            'office_pst' => 'required',
+            'vol_darat' => 'required',
+            'vol_udara' => 'required',
+            'jb' => 'required',
+            'service' => 'required',
+            'payment' => 'required',
+            'destination' => 'required',
+            'jenis' => 'required',
+            // 'berat' => 'required',
+            // 'amount' => 'required',
+        ]);
+        return Redirect::route('inputData3')->with([]);
     }
 
-    public function input3(Request $req)
+    public function store3(Request $req)
     {
-        Redirect::route('outResi')->with([]);
+        return Redirect::route('outResi')->with([]);
     }
 
     public function successResi()

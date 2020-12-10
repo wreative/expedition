@@ -10,7 +10,107 @@
 @include('pages.backend.data.components.wizard')
 <form method="POST" action="{{ route('store2') }}">
     @csrf
-    <input type="hidden" value="{{ $sender_name }}">
+    <input type="hidden" value="{{ Session::get('sender_name') }}" name="sender_name">
+    <input type="hidden" value="{{ Session::get('sender_tlp') }}" name="sender_tlp">
+    <input type="hidden" value="{{ Session::get('sender_addr') }}" name="sender_addr">
+    <input type="hidden" value="{{ Session::get('receiver_name') }}" name="receiver_name">
+    <input type="hidden" value="{{ Session::get('receiver_tlp') }}" name="receiver_tlp">
+    <input type="hidden" value="{{ Session::get('receiver_addr') }}" name="receiver_addr">
+    <input type="hidden" value="{{ Session::get('office_addr') }}" name="office_addr">
+    <input type="hidden" value="{{ Session::get('office_tlp') }}" name="office_tlp">
+    <input type="hidden" value="{{ Session::get('office_pst') }}" name="office_pst">
+    <input type="hidden" value="{{ Session::get('note') }}" name="note">
+    <input type="hidden" value="{{ Session::get('vol_darat') }}" name="vol_darat">
+    <input type="hidden" value="{{ Session::get('vol_udara') }}" name="vol_udara">
+    {{-- <input type="hidden" value="{{ Session::get('berat') }}">
+    <input type="hidden" value="{{ Session::get('amount') }}"> --}}
+    <input type="hidden" value="{{ Session::get('jb') }}" name="jb">
+    <input type="hidden" value="{{ Session::get('service') }}" name="service">
+    <input type="hidden" value="{{ Session::get('payment') }}" name="payment">
+    <input type="hidden" value="{{ Session::get('destination') }}" name="destination">
+    <input type="hidden" value="{{ Session::get('jenis') }}" name="jenis">
+    <!-- TODO: Total Dan Berat -->
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <label class="form-label">{{ __('Berat') }}</label>
+                <div class="form-group">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control text-right satuan @error('berat') is-invalid @enderror"
+                            id="berat" name="berat" placeholder="Berat dengan satuan" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">{{ __('kg') }}</div>
+                        </div>
+                    </div>
+                    @error('berat')
+                    <span class="text-danger">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">{{ __('Jumlah') }}</label>
+                <div class="form-group">
+                    <div class="input-group mb-2">
+                        <input type="number" class="form-control text-right @error('amount') is-invalid @enderror"
+                            name="amount" placeholder="Jumlah dengan satuan" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">{{ __('koli') }}</div>
+                        </div>
+                    </div>
+                    @error('amount')
+                    <span class="text-danger">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                    @if (Session::has('status'))
+                    <span class="text-danger" role="alert">
+                        {{ Session::get('status') }}
+                    </span>
+                    @endif
+                </div>
+            </div>
+            @if (Session::get('jenis') == 'doc')
+            <div class="form-group">
+                <label class="form-label">{{ __('Jumlah Document') }}</label>
+                <div class="form-group">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control text-right satuan @error('doc') is-invalid @enderror"
+                            id="doc" name="doc" placeholder="Jumlah dengan satuan" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">{{ __('pcs') }}</div>
+                        </div>
+                    </div>
+                    @error('doc')
+                    <span class="text-danger">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
+            </div>
+            @elseif(Session::get('jenis') == 'par')
+            <div class="form-group">
+                <label class="form-label">{{ __('Tipe Parcel') }}</label>
+                <div class="form-group">
+                    <select class="form-control form-control-sm" name="par">
+                        <option>{{ __('Small') }}</option>
+                        <option>{{ __('Medium') }}</option>
+                        <option>{{ __('Large') }}</option>
+                    </select>
+                    @error('par')
+                    <span class="text-danger">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
+            </div>
+            @endif
+        </div>
+        <div class="card-footer bg-whitesmoke text-md-right">
+            <button class="btn btn-primary">{{ __('Selanjutnya') }}</button>
+        </div>
+    </div>
 </form>
 @endsection
 @section('script')

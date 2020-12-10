@@ -26,7 +26,7 @@ class Price extends Model
         't_b',
         'vol_dl',
         'vol_u',
-        'weight',
+        'weight_pcs',
         'amount'
     ];
 

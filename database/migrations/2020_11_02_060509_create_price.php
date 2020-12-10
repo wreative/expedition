@@ -22,7 +22,7 @@ class CreatePrice extends Migration
             $table->integer("t_b");
             $table->integer("vol_dl")->nullable();
             $table->integer("vol_u")->nullValue();
-            $table->integer("weight");
+            $table->integer("weight_pcs");
             $table->integer("amount");
         });
     }

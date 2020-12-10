@@ -82,9 +82,9 @@
                 <div class="form-group">
                     <div class="input-group mb-2">
                         <input type="text" class="form-control text-right satuan @error('berat') is-invalid @enderror"
-                            id="berat" name="berat" placeholder="Berat dengan satuan" required>
+                            id="berat" name="berat" placeholder="Berat dengan" required>
                         <div class="input-group-append">
-                            <div class="input-group-text">{{ __('kg') }}</div>
+                            <div class="input-group-text">{{ __('kg / pcs') }}</div>
                         </div>
                     </div>
                     @error('berat')
@@ -138,8 +138,9 @@
         </div>
     </div>
 </div> --}}
-<h2 class="section-title">{{ __('Barang') }}</h2>
 
+
+<h2 class="section-title">{{ __('Barang') }}</h2>
 <div class="card">
     <div class="card-header">
         <h4>{{ __('Volume') }}</h4>
