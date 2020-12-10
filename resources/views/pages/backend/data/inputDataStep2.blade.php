@@ -11,25 +11,23 @@
 <form method="POST" action="{{ route('store2') }}">
     @csrf
     @include('pages.backend.data.components.resi')
-    <input type="hidden" value="{{ Session::get('sender_name') }}" name="sender_name">
-    <input type="hidden" value="{{ Session::get('sender_tlp') }}" name="sender_tlp">
-    <input type="hidden" value="{{ Session::get('sender_addr') }}" name="sender_addr">
-    <input type="hidden" value="{{ Session::get('receiver_name') }}" name="receiver_name">
-    <input type="hidden" value="{{ Session::get('receiver_tlp') }}" name="receiver_tlp">
-    <input type="hidden" value="{{ Session::get('receiver_addr') }}" name="receiver_addr">
-    <input type="hidden" value="{{ Session::get('office_addr') }}" name="office_addr">
-    <input type="hidden" value="{{ Session::get('office_tlp') }}" name="office_tlp">
-    <input type="hidden" value="{{ Session::get('office_pst') }}" name="office_pst">
-    <input type="hidden" value="{{ Session::get('note') }}" name="note">
-    <input type="hidden" value="{{ Session::get('vol_darat') }}" name="vol_darat">
-    <input type="hidden" value="{{ Session::get('vol_udara') }}" name="vol_udara">
-    {{-- <input type="hidden" value="{{ Session::get('berat') }}">
-    <input type="hidden" value="{{ Session::get('amount') }}"> --}}
-    <input type="hidden" value="{{ Session::get('jb') }}" name="jb">
-    <input type="hidden" value="{{ Session::get('service') }}" name="service">
-    <input type="hidden" value="{{ Session::get('payment') }}" name="payment">
-    <input type="hidden" value="{{ Session::get('destination') }}" name="destination">
-    <input type="hidden" value="{{ Session::get('jenis') }}" name="jenis">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_name')) }}" name="sender_name">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_tlp')) }}" name="sender_tlp">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_addr')) }}" name="sender_addr">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('receiver_name')) }}" name="receiver_name">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('receiver_tlp')) }}" name="receiver_tlp">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('receiver_addr')) }}" name="receiver_addr">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('office_addr')) }}" name="office_addr">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('office_tlp')) }}" name="office_tlp">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('office_pst')) }}" name="office_pst">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('note')) }}" name="note">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('vol_darat')) }}" name="vol_darat">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('vol_udara')) }}" name="vol_udara">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('jb')) }}" name="jb">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('service')) }}" name="service">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('payment')) }}" name="payment">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('destination')) }}" name="destination">
+    <input type="hidden" value="{{ Crypt::encryptString(Session::get('jenis')) }}" name="jenis">
     <!-- TODO: Total Dan Berat -->
     <div class="card">
         <div class="card-body">
@@ -95,9 +93,9 @@
                 <label class="form-label">{{ __('Tipe Parcel') }}</label>
                 <div class="form-group">
                     <select class="form-control form-control-sm" name="par">
-                        <option>{{ __('Small') }}</option>
-                        <option>{{ __('Medium') }}</option>
-                        <option>{{ __('Large') }}</option>
+                        <option value="Small">{{ __('Small') }}</option>
+                        <option value="Medium">{{ __('Medium') }}</option>
+                        <option value="Large">{{ __('Large') }}</option>
                     </select>
                     @error('par')
                     <span class="text-danger">
@@ -115,5 +113,5 @@
 </form>
 @endsection
 @section('script')
-<script src="{{ asset('js/pages/inputData.js') }}"></script>
+<script src="{{ asset('js/pages/inputData2.js') }}"></script>
 @endsection

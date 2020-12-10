@@ -7,6 +7,7 @@
 <form method="POST" action="{{ route('store3') }}">
     @csrf
     @include('pages.backend.data.components.resi')
+    <input type="hidden" value="{{ Crypt::decryptString(Session::get('sender_name')) }}" name="sender_name">
     <div class="card">
         <div class="card-body table-responsive">
             <table class="table-hover table">
@@ -85,7 +86,4 @@
         </div>
     </div>
 </form>
-@endsection
-@section('script')
-<script src="{{ asset('js/pages/inputData.js') }}"></script>
 @endsection

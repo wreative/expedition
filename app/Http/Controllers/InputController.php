@@ -14,6 +14,7 @@ use App\Models\Transaction;
 use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Crypt;
 
 class InputController extends Controller
 {
@@ -180,8 +181,6 @@ class InputController extends Controller
             'note' => $req->note,
             'vol_darat' => $vol_darat,
             'vol_udara' => $vol_udara,
-            // 'berat' => $berat,
-            // 'amount' => $req->amount,
             'jb' => $req->jb,
             'service' => $req->service,
             'payment' => $req->payment,
@@ -189,7 +188,6 @@ class InputController extends Controller
             // Has Status
             'jenis' => $status
         ]);
-        // return view('pages.backend.data.inputDataStep2', compact($req->sender_name));
     }
 
     public function store2(Request $req)
@@ -211,14 +209,38 @@ class InputController extends Controller
             'payment' => 'required',
             'destination' => 'required',
             // 'jenis' => 'required|nullable',
-            // 'berat' => 'required',
-            // 'amount' => 'required',
+            'berat' => 'required',
+            'amount' => 'required',
         ]);
 
+        // dd(Crypt::decryptString($req->sender_name));
         // if ($req->jenis != null) {
         // }
 
-        return Redirect::route('inputData3')->with([]);
+        return Redirect::route('inputData3')->with([
+            'sender_name' => $req->sender_name,
+            'sender_tlp' => $req->sender_tlp,
+            'sender_addr' => $req->sender_addr,
+            'receiver_name' => $req->receiver_name,
+            'receiver_tlp' => $req->receiver_tlp,
+            'receiver_addr' => $req->receiver_addr,
+            'office_addr' => $req->office_addr,
+            'office_tlp' => $req->office_tlp,
+            'office_pst' => $req->office_pst,
+            'note' => $req->note,
+            'vol_darat' => $req->vol_darat,
+            'vol_udara' => $req->vol_udara,
+            'berat' => $req->berat,
+            'amount' => $req->amount,
+            'jb' => $req->jb,
+            'service' => $req->service,
+            'payment' => $req->payment,
+            'destination' => $req->destination,
+            'doc' => $req->doc,
+            'par' => $req->par,
+            // Has Status
+            'jenis' => $req->jenis
+        ]);
     }
 
     public function store3(Request $req)
