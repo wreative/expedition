@@ -44,7 +44,7 @@
             <label>{{ __('Kota Tujuan') }}</label>
             <select class="form-control select2" name="destination" id="destination">
                 @foreach ($wilayah as $w)
-                <option value="{{ $w->price }}">{{ $w->name}}</option>
+                <option value="{{ $w->id }}">{{ $w->name}}</option>
                 @endforeach
             </select>
             <input type="hidden" name="dst" id="dst">

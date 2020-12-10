@@ -199,19 +199,23 @@ class InputController extends Controller
             'receiver_name' => 'required',
             'receiver_tlp' => 'required',
             'receiver_addr' => 'required',
-            'office_addr' => 'required',
-            'office_tlp' => 'required',
-            'office_pst' => 'required',
+            // 'office_addr' => 'required|nullable',
+            // 'office_tlp' => 'required|nullable',
+            // 'office_pst' => 'required|nullable',
             'vol_darat' => 'required',
             'vol_udara' => 'required',
             'jb' => 'required',
             'service' => 'required',
             'payment' => 'required',
             'destination' => 'required',
-            'jenis' => 'required',
+            // 'jenis' => 'required|nullable',
             // 'berat' => 'required',
             // 'amount' => 'required',
         ]);
+
+        // if ($req->jenis != null) {
+        // }
+
         return Redirect::route('inputData3')->with([]);
     }
 

@@ -24,6 +24,8 @@ class CreatePrice extends Migration
             $table->integer("vol_u")->nullValue();
             $table->integer("weight_pcs");
             $table->integer("amount");
+            $table->integer("pcs");
+            $table->enum('tipe', ['Small', 'Medium', 'Large']);
         });
     }
 

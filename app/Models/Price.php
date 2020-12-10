@@ -26,8 +26,10 @@ class Price extends Model
         't_b',
         'vol_dl',
         'vol_u',
-        'weight_pcs',
-        'amount'
+        'weight',
+        'amount',
+        'pcs',
+        'tipe'
     ];
 
     public function relation()
