@@ -24,6 +24,7 @@ class CreateResi extends Migration
             $table->string("price");
             $table->string("agen");
             $table->string("transaction");
+            $table->enum('lp', ['SDS', 'ONS', 'Regular'])->nullable();
         });
     }
 

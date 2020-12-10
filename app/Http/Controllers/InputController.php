@@ -43,15 +43,15 @@ class InputController extends Controller
         }
 
         $wilayah = Wilayah::all();
-        $tipe = Type::all();
         $kode = $this->getResi();
-        return view('pages.backend.data.inputData', ['kode' => $kode, 'wilayah' => $wilayah, 'agen' => $agen, 'tipe' => $tipe]);
+        return view('pages.backend.data.inputData', ['kode' => $kode, 'wilayah' => $wilayah, 'agen' => $agen]);
     }
 
     public function index2()
     {
+        $tipe = Type::all();
         $kode = $this->getResi();
-        return view('pages.backend.data.inputDataStep2', ['kode' => $kode]);
+        return view('pages.backend.data.inputDataStep2', ['kode' => $kode, 'tipe' => $tipe]);
     }
 
     public function index3()
@@ -163,9 +163,6 @@ class InputController extends Controller
         //         'codeKota' => $codeKota
         //     ]);
 
-        if ($req->jb == '1') {
-        }
-
         $status = $req->jb == '2' ? 'doc' : ($req->jb == '3' ? 'par' : '');
 
         return Redirect::route('inputData2')->with([
@@ -232,6 +229,7 @@ class InputController extends Controller
             'vol_udara' => $req->vol_udara,
             'berat' => $req->berat,
             'amount' => $req->amount,
+            'lp' => $req->lp,
             'jb' => $req->jb,
             'service' => $req->service,
             'payment' => $req->payment,

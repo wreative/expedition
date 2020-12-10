@@ -209,22 +209,22 @@
         </div>
     </div>
 </div>
-<div class="card">
+{{-- <div class="card">
     <div class="card-header">
         <h4>{{ __('Jenis Barang') }}</h4>
-    </div>
-    <div class="card-body">
-        <div class="form-group">
-            <select class="form-control select2" name="jb">
-                @foreach ($tipe as $t)
-                <option value="{{ $t->id }}">{{ $t->name}}</option>
-                @endforeach
-            </select>
-            @error('jb')
-            <span class="text-danger">
-                {{ $message }}
-            </span>
-            @enderror
-        </div>
+</div>
+<div class="card-body">
+    <div class="form-group">
+        <select class="form-control select2" name="jb">
+            @foreach ($tipe as $t)
+            <option value="{{ $t->id }}">{{ $t->name}}</option>
+            @endforeach
+        </select>
+        @error('jb')
+        <span class="text-danger">
+            {{ $message }}
+        </span>
+        @enderror
     </div>
 </div>
+</div> --}}

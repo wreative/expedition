@@ -30,6 +30,25 @@
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('jenis')) }}" name="jenis">
     <!-- TODO: Total Dan Berat -->
     <div class="card">
+        <div class="card-header">
+            <h4>{{ __('Jenis Barang') }}</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <select class="form-control select2" name="jb" id="jb">
+                    @foreach ($tipe as $t)
+                    <option value="{{ $t->id }}">{{ $t->name}}</option>
+                    @endforeach
+                </select>
+                @error('jb')
+                <span class="text-danger">
+                    {{ $message }}
+                </span>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="card">
         <div class="card-body">
             <div class="form-group">
                 <label class="form-label">{{ __('Berat') }}</label>
@@ -70,8 +89,22 @@
                     @endif
                 </div>
             </div>
-            @if (Session::get('jenis') == 'doc')
             <div class="form-group">
+                <label class="form-label">{{ __('Layanan Pengiriman') }}</label>
+                <div class="form-group">
+                    <select class="form-control form-control-sm" name="lp" id="lp">
+                        <option value="Regular">{{ __('Regular') }}</option>
+                        <option value="SDS">{{ __('Same Day Service') }}</option>
+                        <option value="ONS">{{ __('Over Night Service') }}</option>
+                    </select>
+                    @error('lp')
+                    <span class="text-danger">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group d-none" id="doc">
                 <label class="form-label">{{ __('Jumlah Document') }}</label>
                 <div class="form-group">
                     <div class="input-group mb-2">
@@ -88,8 +121,7 @@
                     @enderror
                 </div>
             </div>
-            @elseif(Session::get('jenis') == 'par')
-            <div class="form-group">
+            <div class="form-group d-none" id="par">
                 <label class="form-label">{{ __('Tipe Parcel') }}</label>
                 <div class="form-group">
                     <select class="form-control form-control-sm" name="par">
@@ -104,7 +136,6 @@
                     @enderror
                 </div>
             </div>
-            @endif
         </div>
         <div class="card-footer bg-whitesmoke text-md-right">
             <button class="btn btn-primary">{{ __('Selanjutnya') }}</button>
