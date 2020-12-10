@@ -10,6 +10,7 @@
 @include('pages.backend.data.components.wizard')
 <form method="POST" action="{{ route('store2') }}">
     @csrf
+    @include('pages.backend.data.components.resi')
     <input type="hidden" value="{{ Session::get('sender_name') }}" name="sender_name">
     <input type="hidden" value="{{ Session::get('sender_tlp') }}" name="sender_tlp">
     <input type="hidden" value="{{ Session::get('sender_addr') }}" name="sender_addr">

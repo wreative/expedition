@@ -49,12 +49,14 @@ class InputController extends Controller
 
     public function index2()
     {
-        return view('pages.backend.data.inputDataStep2');
+        $kode = $this->getResi();
+        return view('pages.backend.data.inputDataStep2', ['kode' => $kode]);
     }
 
     public function index3()
     {
-        return view('pages.backend.data.inputDataStep3');
+        $kode = $this->getResi();
+        return view('pages.backend.data.inputDataStep3', ['kode' => $kode]);
     }
 
     public function store(Request $req)

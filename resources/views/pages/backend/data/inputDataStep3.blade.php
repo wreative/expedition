@@ -3,17 +3,10 @@
 @section('titleContent', __('Input Data'))
 
 @section('content')
-{{-- <h2 class="section-title">{{ $kode }}</h2>
-<p class="section-lead">
-    {{ __('Refrensi nomor resi yang saat ini digunakan') }}
-</p> --}}
 @include('pages.backend.data.components.wizard')
 <form method="POST" action="{{ route('store3') }}">
     @csrf
-    <h2 class="section-title">sasa</h2>
-    <p class="section-lead">
-        {{ __('Refrensi nomor resi yang saat ini digunakan') }}
-    </p>
+    @include('pages.backend.data.components.resi')
     <div class="card">
         <div class="card-body table-responsive">
             <table class="table-hover table">

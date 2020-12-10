@@ -21,11 +21,11 @@ class CreatePrice extends Migration
             $table->integer("b_l");
             $table->integer("t_b");
             $table->integer("vol_dl")->nullable();
-            $table->integer("vol_u")->nullValue();
+            $table->integer("vol_u")->nullable();
             $table->integer("weight_pcs");
             $table->integer("amount");
-            $table->integer("pcs");
-            $table->enum('tipe', ['Small', 'Medium', 'Large']);
+            $table->integer("pcs")->nullable();
+            $table->enum('tipe', ['Small', 'Medium', 'Large'])->nullable();
         });
     }
 
