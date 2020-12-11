@@ -26,6 +26,6 @@ class Package extends Model
 
     public function relation()
     {
-        return $this->hasMany('App\Models\Wilayah', 'pak_id', 'id');
+        return $this->hasOne('App\Models\Wilayah', 'pak_id', 'id');
     }
 }

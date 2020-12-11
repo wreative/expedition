@@ -1,10 +1,5 @@
 "use strict";
 
-// var cleave = new Cleave(".satuan", {
-//     numeral: true,
-//     numeralThousandsGroupStyle: "thousand"
-// });
-
 $(".satuan")
     .toArray()
     .forEach(function(field) {
@@ -14,12 +9,16 @@ $(".satuan")
         });
     });
 
-$("#jb").on("change", function() {
-    if ($(this).val() == "2") {
-        // $("#par").attr("required", "");
-        $("#doc").removeAttr("d-none");
-    } else if ($(this).val() == "3") {
-        $("#otherFieldDiv").hide();
-        $("#par").removeAttr("d-none");
+$("#jb").on("select2:select", function(e) {
+    var data = e.params.data;
+    if (data.id == "2") {
+        $("#par").addClass("d-none");
+        $("#doc").removeClass("d-none");
+    } else if (data.id == "3") {
+        $("#doc").addClass("d-none");
+        $("#par").removeClass("d-none");
+    } else {
+        $("#par").addClass("d-none");
+        $("#doc").addClass("d-none");
     }
 });

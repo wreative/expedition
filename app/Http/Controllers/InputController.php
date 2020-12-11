@@ -163,7 +163,7 @@ class InputController extends Controller
         //         'codeKota' => $codeKota
         //     ]);
 
-        $status = $req->jb == '2' ? 'doc' : ($req->jb == '3' ? 'par' : '');
+        // $status = $req->jb == '2' ? 'doc' : ($req->jb == '3' ? 'par' : '');
 
         return Redirect::route('inputData2')->with([
             'sender_name' => $req->sender_name,
@@ -178,12 +178,12 @@ class InputController extends Controller
             'note' => $req->note,
             'vol_darat' => $vol_darat,
             'vol_udara' => $vol_udara,
-            'jb' => $req->jb,
+            // 'jb' => $req->jb,
             'service' => $req->service,
             'payment' => $req->payment,
             'destination' => $req->destination,
             // Has Status
-            'jenis' => $status
+            // 'jenis' => $status
         ]);
     }
 
@@ -201,13 +201,17 @@ class InputController extends Controller
             // 'office_pst' => 'required|nullable',
             'vol_darat' => 'required',
             'vol_udara' => 'required',
-            'jb' => 'required',
+            // 'note' => 'required',
             'service' => 'required',
             'payment' => 'required',
             'destination' => 'required',
             // 'jenis' => 'required|nullable',
+            'jb' => 'required',
             'berat' => 'required',
             'amount' => 'required',
+            'lp' => 'required',
+            'doc' => 'required_if:jb,2',
+            'par' => 'required_if:jb,3'
         ]);
 
         // dd(Crypt::decryptString($req->sender_name));
@@ -227,23 +231,78 @@ class InputController extends Controller
             'note' => $req->note,
             'vol_darat' => $req->vol_darat,
             'vol_udara' => $req->vol_udara,
-            'berat' => $req->berat,
-            'amount' => $req->amount,
-            'lp' => $req->lp,
-            'jb' => $req->jb,
             'service' => $req->service,
             'payment' => $req->payment,
             'destination' => $req->destination,
+            'jb' => $req->jb,
+            'berat' => $req->berat,
+            'amount' => $req->amount,
+            'lp' => $req->lp,
             'doc' => $req->doc,
             'par' => $req->par,
             // Has Status
-            'jenis' => $req->jenis
+            // 'jenis' => $req->jenis
         ]);
     }
 
     public function store3(Request $req)
     {
-        return Redirect::route('outResi')->with([]);
+        //Input Data
+        Detailed::create([
+            'sender_name' => $req->sender_name,
+            'sender_tlp' => $req->sender_tlp,
+            'sender_addr' => $req->sender_addr,
+            'receiver_name' => $req->receiver_name,
+            'receiver_tlp' => $req->receiver_tlp,
+            'receiver_addr' => $req->receiver_addr,
+            'office_tlp' => $req->office_tlp,
+            'office_addr' => $req->office_addr,
+            'office_pst' => $req->office_pst,
+            'note' => $req->note
+        ]);
+
+        Price::create([
+            'b_k' => $this->removeComma($req->bk),
+            // 'b_po' => $req->bpo,
+            // 'b_pa' => $req->bpa,
+            // 'b_l' => $req->bl,
+            'b_po' => '0',
+            'b_pa' => '0',
+            'b_l' => '0',
+            't_b' => $this->removeComma($req->tb),
+            'vol_dl' => $vol_darat,
+            'vol_u' => $vol_udara,
+            'weight' => $this->removeComma($req->berat),
+            'amount' => $req->amount,
+            'pcs' => '',
+            'tipe' => ''
+        ]);
+
+        Resi::create([
+            'transaction' => 'sad',
+            'nomor' => $resi,
+            'detailed' => $count,
+            'jb' => $req->jb,
+            'service' => $req->service,
+            'payment' => $req->payment,
+            'destination' => $req->destination,
+            'price' => $count,
+            'agen' => $req->agen,
+            'transaction' => $count
+        ]);
+
+        Transaction::create([
+            'code' => $transaksi,
+            'status' => '1',
+            'track' => '1'
+        ]);
+
+        return Redirect::route('outResi')->with([
+            'resi' => $resi,
+            'transaksi' => $transaksi,
+            'codeArea' => $codeArea,
+            'codeKota' => $codeKota
+        ]);
     }
 
     public function successResi()

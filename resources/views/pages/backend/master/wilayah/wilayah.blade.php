@@ -22,7 +22,7 @@
                         </th>
                         <th>{{ __('Nama') }}</th>
                         <th>{{ __('Kode') }}</th>
-                        <th>{{ __('Harga') }}</th>
+                        {{-- <th>{{ __('Harga') }}</th> --}}
                         <th>{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                         </td>
                         <td>{{ $w->name }}</td>
                         <td>{{ $w->code }}</td>
-                        <td>{{ __('Rp. ').number_format($w->price) }}</td>
+                        {{-- <td>{{ __('Rp. ').number_format($w->price) }}</td> --}}
                         <td>
                             <a href="/wilayah/edit/{{ $w->id }}" class="btn btn-primary btn-action mb-1 mt-1 mr-1"
                                 data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>

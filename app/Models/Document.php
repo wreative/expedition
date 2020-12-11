@@ -25,6 +25,6 @@ class Document extends Model
 
     public function relation()
     {
-        return $this->hasMany('App\Models\Wilayah', 'dok_id', 'id');
+        return $this->hasOne('App\Models\Wilayah', 'dok_id', 'id');
     }
 }

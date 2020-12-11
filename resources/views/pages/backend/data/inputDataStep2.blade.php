@@ -11,6 +11,7 @@
 <form method="POST" action="{{ route('store2') }}">
     @csrf
     @include('pages.backend.data.components.resi')
+    <!-- TODO: Input Hidden -->
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_name')) }}" name="sender_name">
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_tlp')) }}" name="sender_tlp">
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_addr')) }}" name="sender_addr">
@@ -23,11 +24,11 @@
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('note')) }}" name="note">
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('vol_darat')) }}" name="vol_darat">
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('vol_udara')) }}" name="vol_udara">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('jb')) }}" name="jb">
+    {{-- <input type="hidden" value="{{ Crypt::encryptString(Session::get('jb')) }}" name="jb"> --}}
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('service')) }}" name="service">
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('payment')) }}" name="payment">
     <input type="hidden" value="{{ Crypt::encryptString(Session::get('destination')) }}" name="destination">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('jenis')) }}" name="jenis">
+    {{-- <input type="hidden" value="{{ Crypt::encryptString(Session::get('jenis')) }}" name="jenis"> --}}
     <!-- TODO: Total Dan Berat -->
     <div class="card">
         <div class="card-header">
@@ -109,7 +110,7 @@
                 <div class="form-group">
                     <div class="input-group mb-2">
                         <input type="text" class="form-control text-right satuan @error('doc') is-invalid @enderror"
-                            id="doc" name="doc" placeholder="Jumlah dengan satuan" required>
+                            name="doc" placeholder="Jumlah dengan satuan">
                         <div class="input-group-append">
                             <div class="input-group-text">{{ __('pcs') }}</div>
                         </div>

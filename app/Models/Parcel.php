@@ -25,6 +25,6 @@ class Parcel extends Model
 
     public function relation()
     {
-        return $this->hasMany('App\Models\Wilayah', 'par_id', 'id');
+        return $this->hasOne('App\Models\Wilayah', 'par_id', 'id');
     }
 }
