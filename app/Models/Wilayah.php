@@ -22,7 +22,10 @@ class Wilayah extends Model
     protected $fillable = [
         'name',
         'code',
-        'price'
+        // 'dok_id',
+        // 'pak_id',
+        // 'par_id'
+        // 'price'
     ];
 
     public function relation()

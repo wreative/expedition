@@ -17,6 +17,9 @@ class CreateWilayah extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
+            // $table->string('dok_id');
+            // $table->string('pak_id');
+            // $table->string('par_id');
             // $table->integer('price');
         });
     }

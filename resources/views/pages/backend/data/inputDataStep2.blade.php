@@ -12,23 +12,25 @@
     @csrf
     @include('pages.backend.data.components.resi')
     <!-- TODO: Input Hidden -->
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_name')) }}" name="sender_name">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_tlp')) }}" name="sender_tlp">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('sender_addr')) }}" name="sender_addr">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('receiver_name')) }}" name="receiver_name">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('receiver_tlp')) }}" name="receiver_tlp">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('receiver_addr')) }}" name="receiver_addr">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('office_addr')) }}" name="office_addr">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('office_tlp')) }}" name="office_tlp">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('office_pst')) }}" name="office_pst">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('note')) }}" name="note">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('vol_darat')) }}" name="vol_darat">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('vol_udara')) }}" name="vol_udara">
-    {{-- <input type="hidden" value="{{ Crypt::encryptString(Session::get('jb')) }}" name="jb"> --}}
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('service')) }}" name="service">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('payment')) }}" name="payment">
-    <input type="hidden" value="{{ Crypt::encryptString(Session::get('destination')) }}" name="destination">
-    {{-- <input type="hidden" value="{{ Crypt::encryptString(Session::get('jenis')) }}" name="jenis"> --}}
+    <input type="hidden" value="{{ Session::get('sender_name') }}" name="sender_name">
+    <input type="hidden" value="{{ Session::get('sender_tlp') }}" name="sender_tlp">
+    <input type="hidden" value="{{ Session::get('sender_addr') }}" name="sender_addr">
+    <input type="hidden" value="{{ Session::get('receiver_name') }}" name="receiver_name">
+    <input type="hidden" value="{{ Session::get('receiver_tlp') }}" name="receiver_tlp">
+    <input type="hidden" value="{{ Session::get('receiver_addr') }}" name="receiver_addr">
+    <input type="hidden" value="{{ Session::get('office_addr') }}" name="office_addr">
+    <input type="hidden" value="{{ Session::get('office_tlp') }}" name="office_tlp">
+    <input type="hidden" value="{{ Session::get('office_pst') }}" name="office_pst">
+    <input type="hidden" value="{{ Session::get('note') }}" name="note">
+    <input type="hidden" value="{{ Session::get('vol_darat') }}" name="vol_darat">
+    <input type="hidden" value="{{ Session::get('vol_udara') }}" name="vol_udara">
+    <input type="hidden" value="{{ Session::get('berat') }}" name="berat">
+    <input type="hidden" value="{{ Session::get('amount') }}" name="amount">
+    {{-- <input type="hidden" value="{{ Session::get('jb')) }}" name="jb"> --}}
+    <input type="hidden" value="{{ Session::get('service') }}" name="service">
+    <input type="hidden" value="{{ Session::get('payment') }}" name="payment">
+    <input type="hidden" value="{{ Session::get('destination') }}" name="destination">
+    {{-- <input type="hidden" value="{{ Session::get('jenis')) }}" name="jenis"> --}}
     <!-- TODO: Total Dan Berat -->
     <div class="card">
         <div class="card-header">
@@ -51,45 +53,6 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <div class="form-group">
-                <label class="form-label">{{ __('Berat') }}</label>
-                <div class="form-group">
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control text-right satuan @error('berat') is-invalid @enderror"
-                            id="berat" name="berat" placeholder="Berat dengan satuan" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">{{ __('kg') }}</div>
-                        </div>
-                    </div>
-                    @error('berat')
-                    <span class="text-danger">
-                        {{ $message }}
-                    </span>
-                    @enderror
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">{{ __('Jumlah') }}</label>
-                <div class="form-group">
-                    <div class="input-group mb-2">
-                        <input type="number" class="form-control text-right @error('amount') is-invalid @enderror"
-                            name="amount" placeholder="Jumlah dengan satuan" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">{{ __('koli') }}</div>
-                        </div>
-                    </div>
-                    @error('amount')
-                    <span class="text-danger">
-                        {{ $message }}
-                    </span>
-                    @enderror
-                    @if (Session::has('status'))
-                    <span class="text-danger" role="alert">
-                        {{ Session::get('status') }}
-                    </span>
-                    @endif
-                </div>
-            </div>
             <div class="form-group">
                 <label class="form-label">{{ __('Layanan Pengiriman') }}</label>
                 <div class="form-group">

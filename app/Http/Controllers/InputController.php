@@ -36,12 +36,7 @@ class InputController extends Controller
     public function index()
     {
         $checkAgen = Agen::find(Auth::user()->agen);
-        if (Auth::user()->id == '1') {
-            $agen = "000";
-        } else {
-            $agen = $checkAgen->code;
-        }
-
+        $agen = Auth::user()->id == '1' ? $agen = "000" : $agen = $checkAgen->code;
         $wilayah = Wilayah::all();
         $kode = $this->getResi();
         return view('pages.backend.data.inputData', ['kode' => $kode, 'wilayah' => $wilayah, 'agen' => $agen]);
@@ -92,8 +87,8 @@ class InputController extends Controller
             'panjang' => 'required_with:lebar,tinggi',
             'lebar' => 'required_with:lebar,panjang',
             'tinggi' => 'required_with:lebar,panjang',
-            // 'berat' => 'required',
-            // 'amount' => 'required',
+            'berat' => 'required',
+            'amount' => 'required',
         ]);
 
         if ($req->amount == "0") {
@@ -104,6 +99,7 @@ class InputController extends Controller
         $vol_darat = round($this->removeComma(($req->panjang * $req->lebar * $req->tinggi) / 4000));
         $vol_udara = round($this->removeComma(($req->panjang * $req->lebar * $req->tinggi) / 6000));
 
+        // Decision Weight
         $berat = $vol_darat < $req->berat ? $req->berat : $vol_darat;
 
 
@@ -178,6 +174,8 @@ class InputController extends Controller
             'note' => $req->note,
             'vol_darat' => $vol_darat,
             'vol_udara' => $vol_udara,
+            'berat' => $berat,
+            'amount' => $req->amount,
             // 'jb' => $req->jb,
             'service' => $req->service,
             'payment' => $req->payment,
@@ -190,28 +188,30 @@ class InputController extends Controller
     public function store2(Request $req)
     {
         $this->validate($req, [
+            // Hidden Validate
             'sender_name' => 'required',
             'sender_tlp' => 'required',
             'sender_addr' => 'required',
             'receiver_name' => 'required',
             'receiver_tlp' => 'required',
             'receiver_addr' => 'required',
-            // 'office_addr' => 'required|nullable',
-            // 'office_tlp' => 'required|nullable',
-            // 'office_pst' => 'required|nullable',
+            'office_addr' => 'nullable',
+            'office_tlp' => 'nullable',
+            'office_pst' => 'nullable',
+            'note' => 'nullable',
             'vol_darat' => 'required',
             'vol_udara' => 'required',
-            // 'note' => 'required',
+            'berat' => 'required',
+            'amount' => 'nullable',
             'service' => 'required',
             'payment' => 'required',
             'destination' => 'required',
-            // 'jenis' => 'required|nullable',
+            // Visible Validate            
             'jb' => 'required',
-            'berat' => 'required',
-            'amount' => 'required',
             'lp' => 'required',
             'doc' => 'required_if:jb,2',
             'par' => 'required_if:jb,3'
+            // 'jenis' => 'required|nullable',
         ]);
 
         // dd(Crypt::decryptString($req->sender_name));
@@ -231,15 +231,15 @@ class InputController extends Controller
             'note' => $req->note,
             'vol_darat' => $req->vol_darat,
             'vol_udara' => $req->vol_udara,
+            'berat' => $req->berat,
+            'amount' => $req->amount,
             'service' => $req->service,
             'payment' => $req->payment,
             'destination' => $req->destination,
             'jb' => $req->jb,
-            'berat' => $req->berat,
-            'amount' => $req->amount,
             'lp' => $req->lp,
             'doc' => $req->doc,
-            'par' => $req->par,
+            'par' => $req->par
             // Has Status
             // 'jenis' => $req->jenis
         ]);
@@ -248,54 +248,55 @@ class InputController extends Controller
     public function store3(Request $req)
     {
         //Input Data
-        Detailed::create([
-            'sender_name' => $req->sender_name,
-            'sender_tlp' => $req->sender_tlp,
-            'sender_addr' => $req->sender_addr,
-            'receiver_name' => $req->receiver_name,
-            'receiver_tlp' => $req->receiver_tlp,
-            'receiver_addr' => $req->receiver_addr,
-            'office_tlp' => $req->office_tlp,
-            'office_addr' => $req->office_addr,
-            'office_pst' => $req->office_pst,
-            'note' => $req->note
-        ]);
 
-        Price::create([
-            'b_k' => $this->removeComma($req->bk),
-            // 'b_po' => $req->bpo,
-            // 'b_pa' => $req->bpa,
-            // 'b_l' => $req->bl,
-            'b_po' => '0',
-            'b_pa' => '0',
-            'b_l' => '0',
-            't_b' => $this->removeComma($req->tb),
-            'vol_dl' => $vol_darat,
-            'vol_u' => $vol_udara,
-            'weight' => $this->removeComma($req->berat),
-            'amount' => $req->amount,
-            'pcs' => '',
-            'tipe' => ''
-        ]);
+        // Detailed::create([
+        //     'sender_name' => $req->sender_name,
+        //     'sender_tlp' => $req->sender_tlp,
+        //     'sender_addr' => $req->sender_addr,
+        //     'receiver_name' => $req->receiver_name,
+        //     'receiver_tlp' => $req->receiver_tlp,
+        //     'receiver_addr' => $req->receiver_addr,
+        //     'office_tlp' => $req->office_tlp,
+        //     'office_addr' => $req->office_addr,
+        //     'office_pst' => $req->office_pst,
+        //     'note' => $req->note
+        // ]);
 
-        Resi::create([
-            'transaction' => 'sad',
-            'nomor' => $resi,
-            'detailed' => $count,
-            'jb' => $req->jb,
-            'service' => $req->service,
-            'payment' => $req->payment,
-            'destination' => $req->destination,
-            'price' => $count,
-            'agen' => $req->agen,
-            'transaction' => $count
-        ]);
+        // Price::create([
+        //     'b_k' => $this->removeComma($req->bk),
+        //     // 'b_po' => $req->bpo,
+        //     // 'b_pa' => $req->bpa,
+        //     // 'b_l' => $req->bl,
+        //     'b_po' => '0',
+        //     'b_pa' => '0',
+        //     'b_l' => '0',
+        //     't_b' => $this->removeComma($req->tb),
+        //     'vol_dl' => $vol_darat,
+        //     'vol_u' => $vol_udara,
+        //     'weight' => $this->removeComma($req->berat),
+        //     'amount' => $req->amount,
+        //     'pcs' => '',
+        //     'tipe' => ''
+        // ]);
 
-        Transaction::create([
-            'code' => $transaksi,
-            'status' => '1',
-            'track' => '1'
-        ]);
+        // Resi::create([
+        //     'transaction' => 'sad',
+        //     'nomor' => $resi,
+        //     'detailed' => $count,
+        //     'jb' => $req->jb,
+        //     'service' => $req->service,
+        //     'payment' => $req->payment,
+        //     'destination' => $req->destination,
+        //     'price' => $count,
+        //     'agen' => $req->agen,
+        //     'transaction' => $count
+        // ]);
+
+        // Transaction::create([
+        //     'code' => $transaksi,
+        //     'status' => '1',
+        //     'track' => '1'
+        // ]);
 
         return Redirect::route('outResi')->with([
             'resi' => $resi,
@@ -354,7 +355,7 @@ class InputController extends Controller
         return str_replace(',', '', $number);
     }
 
-    public function shippingCost()
+    public function cityCourier()
     {
     }
 }
