@@ -57,9 +57,9 @@
                 <label class="form-label">{{ __('Layanan Pengiriman') }}</label>
                 <div class="form-group">
                     <select class="form-control form-control-sm" name="lp" id="lp">
-                        <option value="Regular">{{ __('Regular') }}</option>
-                        <option value="SDS">{{ __('Same Day Service') }}</option>
-                        <option value="ONS">{{ __('Over Night Service') }}</option>
+                        <option value="1">{{ __('Regular') }}</option>
+                        <option value="2">{{ __('Over Night Service') }}</option>
+                        <option value="3">{{ __('Same Day Service') }}</option>
                     </select>
                     @error('lp')
                     <span class="text-danger">
@@ -89,9 +89,9 @@
                 <label class="form-label">{{ __('Tipe Parcel') }}</label>
                 <div class="form-group">
                     <select class="form-control form-control-sm" name="par">
-                        <option value="Small">{{ __('Small') }}</option>
-                        <option value="Medium">{{ __('Medium') }}</option>
-                        <option value="Large">{{ __('Large') }}</option>
+                        <option value="1">{{ __('Small') }}</option>
+                        <option value="2">{{ __('Medium') }}</option>
+                        <option value="3">{{ __('Large') }}</option>
                     </select>
                     @error('par')
                     <span class="text-danger">
@@ -102,7 +102,7 @@
             </div>
         </div>
         <div class="card-footer bg-whitesmoke text-md-right">
-            <button class="btn btn-primary">{{ __('Selanjutnya') }}</button>
+            <button class="btn btn-primary" type="submit">{{ __('Selanjutnya') }}</button>
         </div>
     </div>
 </form>

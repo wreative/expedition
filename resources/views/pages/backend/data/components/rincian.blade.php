@@ -5,39 +5,25 @@
         <div class="form-group">
             <label class="form-label">{{ __('Layanan') }}</label>
             <div class="selectgroup w-100">
+                @foreach ($layanan as $l)
                 <label class="selectgroup-item">
-                    <input type="radio" name="service" value="1" class="selectgroup-input">
-                    <span class="selectgroup-button">{{ __('Domestik Express') }}</span>
+                    <input type="radio" name="service" value="{{ $l->id }}" class="selectgroup-input"
+                        {{ $l->id == '4' ? 'checked' : 'checked' }}>
+                    <span class="selectgroup-button">{{ $l->name }}</span>
                 </label>
-                <label class="selectgroup-item">
-                    <input type="radio" name="service" value="2" class="selectgroup-input">
-                    <span class="selectgroup-button">{{ __('City Courier') }}</span>
-                </label>
-                <label class="selectgroup-item">
-                    <input type="radio" name="service" value="3" class="selectgroup-input">
-                    <span class="selectgroup-button">{{ __('Prioritas') }}</span>
-                </label>
-                <label class="selectgroup-item">
-                    <input type="radio" name="service" value="4" class="selectgroup-input" checked>
-                    <span class="selectgroup-button">{{ __('Tujuan Khusus') }}</span>
-                </label>
+                @endforeach
             </div>
         </div>
         <div class="form-group">
             <label class="form-label">{{ __('Sistem Pembayaran') }}</label>
             <div class="selectgroup w-100">
+                @foreach ($pembayaran as $p)
                 <label class="selectgroup-item">
-                    <input type="radio" name="payment" value="1" class="selectgroup-input" checked>
-                    <span class="selectgroup-button">{{ __('Tunai') }}</span>
+                    <input type="radio" name="payment" value="{{ $p->id }}" class="selectgroup-input"
+                        {{ $p->id == '2' ? 'disabled' : ($p->id == '3' ? 'disabled' : 'checked') }}>
+                    <span class="selectgroup-button">{{ $p->name }}</span>
                 </label>
-                <label class="selectgroup-item">
-                    <input type="radio" name="payment" value="2" class="selectgroup-input" disabled>
-                    <span class="selectgroup-button">{{ __('COD') }}</span>
-                </label>
-                <label class="selectgroup-item">
-                    <input type="radio" name="payment" value="3" class="selectgroup-input" disabled>
-                    <span class="selectgroup-button">{{ __('Tagihan') }}</span>
-                </label>
+                @endforeach
             </div>
         </div>
         <div class="form-group">
@@ -56,6 +42,6 @@
         </div>
     </div>
     <div class="card-footer bg-whitesmoke text-md-right">
-        <button class="btn btn-primary">{{ __('Selanjutnya') }}</button>
+        <button class="btn btn-primary" type="submit">{{ __('Selanjutnya') }}</button>
     </div>
 </div>

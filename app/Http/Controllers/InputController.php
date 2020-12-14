@@ -12,9 +12,13 @@ use App\Models\Agen;
 use App\Models\Detailed;
 use App\Models\Transaction;
 use App\Models\Type;
+use App\Models\Service;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
+use App\Http\Controllers\Service\CityCourierController;
+use App\Http\Controllers\Controller;
 
 class InputController extends Controller
 {
@@ -23,8 +27,10 @@ class InputController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $CityCourierController;
+    public function __construct(CityCourierController $CityCourierController)
     {
+        $this->CityCourierController = $CityCourierController;
         $this->middleware('auth');
     }
 
@@ -38,8 +44,16 @@ class InputController extends Controller
         $checkAgen = Agen::find(Auth::user()->agen);
         $agen = Auth::user()->id == '1' ? $agen = "000" : $agen = $checkAgen->code;
         $wilayah = Wilayah::all();
+        $pembayaran = Payment::all();
+        $layanan = Service::all();
         $kode = $this->getResi();
-        return view('pages.backend.data.inputData', ['kode' => $kode, 'wilayah' => $wilayah, 'agen' => $agen]);
+        return view('pages.backend.data.inputData', [
+            'kode' => $kode,
+            'wilayah' => $wilayah,
+            'agen' => $agen,
+            'pembayaran' => $pembayaran,
+            'layanan' => $layanan
+        ]);
     }
 
     public function index2()
@@ -102,7 +116,6 @@ class InputController extends Controller
         // Decision Weight
         $berat = $vol_darat < $req->berat ? $req->berat : $vol_darat;
 
-
         // Input Data
         // Resi::create([
         //     'transaction' => 'sad',
@@ -159,7 +172,7 @@ class InputController extends Controller
         //         'codeKota' => $codeKota
         //     ]);
 
-        // $status = $req->jb == '2' ? 'doc' : ($req->jb == '3' ? 'par' : '');
+        // $status = $req->jb == '2' ? 'doc' : ($req->jb == '3' ? 'par' : '');        
 
         return Redirect::route('inputData2')->with([
             'sender_name' => $req->sender_name,
@@ -218,6 +231,24 @@ class InputController extends Controller
         // if ($req->jenis != null) {
         // }
 
+        // dd($req->jb->name);
+
+
+        // Biaya Kirim
+        $bk = $this->CityCourierController->initial(
+            $this->multipleData('jenis_barang', $req->jb)->name,
+            $req->lp,
+            $this->removeComma($req->doc),
+            $req->par,
+            $req->berat,
+            $req->amount
+        );
+
+        dd($bk);
+
+        //TODO: Layanan Tidak ada
+
+
         return Redirect::route('inputData3')->with([
             'sender_name' => $req->sender_name,
             'sender_tlp' => $req->sender_tlp,
@@ -233,13 +264,14 @@ class InputController extends Controller
             'vol_udara' => $req->vol_udara,
             'berat' => $req->berat,
             'amount' => $req->amount,
-            'service' => $req->service,
-            'payment' => $req->payment,
-            'destination' => $req->destination,
-            'jb' => $req->jb,
+            'service' => $this->multipleData('layanan_pengiriman', $req->service),
+            'payment' => $this->multipleData('pembayaran', $req->payment),
+            'destination' => $this->multipleData('wilayah', $req->destination),
+            'jb' => $this->multipleData('jenis_barang', $req->jb),
             'lp' => $req->lp,
             'doc' => $req->doc,
-            'par' => $req->par
+            'par' => $req->par,
+            'bk' => $bk
             // Has Status
             // 'jenis' => $req->jenis
         ]);
@@ -248,7 +280,6 @@ class InputController extends Controller
     public function store3(Request $req)
     {
         //Input Data
-
         // Detailed::create([
         //     'sender_name' => $req->sender_name,
         //     'sender_tlp' => $req->sender_tlp,
@@ -350,12 +381,14 @@ class InputController extends Controller
         return $random;
     }
 
-    public function removeComma($number)
+    function removeComma($number)
     {
         return str_replace(',', '', $number);
     }
 
-    public function cityCourier()
+    function multipleData($table, $id)
     {
+        $data = DB::table($table)->select('*')->where('id', '=', $id)->first();
+        return current(array($data));
     }
 }
