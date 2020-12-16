@@ -15,12 +15,20 @@ class CityCourierController extends Controller
         } else if ($jenis == 'Parcel') {
             return $this->parcel($layanan, $par);
         } else if ($jenis == 'Paket') {
-            return $this->paket();
+            return $this->paket($layanan, $berat);
         }
     }
 
-    function paket()
+    function paket($layanan, $berat)
     {
+        switch ($layanan) {
+            case 1:
+                return $this->paketFormula(5, $berat, 7000, 5000);
+            case 2:
+                return $this->paketFormula(5, $berat, 12000, 6000);
+            case 3:
+                return $this->paketFormula(5, $berat, 20000, 8000);
+        }
     }
 
     public function dokumen($layanan, $doc)
@@ -59,8 +67,19 @@ class CityCourierController extends Controller
         }
     }
 
-    function kelipatan($jarak, $batas)
+    function paketFormula($jarak, $batas, $hargaAsli, $berikut)
     {
+        $var = $new = 0;
+        do {
+            if ($var >= $jarak) {
+                $harga = $berikut;
+            } else {
+                $harga = $hargaAsli;
+            }
+            $new += $harga;
+            $var += $jarak;
+        } while ($var <= $batas);
+        return $new;
     }
 
     function cityCourier($jenis, $layanan, $doc, $par, $berat, $amount)
