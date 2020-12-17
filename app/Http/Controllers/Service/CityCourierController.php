@@ -67,14 +67,14 @@ class CityCourierController extends Controller
         }
     }
 
-    function paketFormula($jarak, $batas, $hargaAsli, $berikut)
+    function paketFormula($jarak, $batas, $pertama, $berikut)
     {
         $var = $new = 0;
         do {
             if ($var >= $jarak) {
                 $harga = $berikut;
             } else {
-                $harga = $hargaAsli;
+                $harga = $pertama;
             }
             $new += $harga;
             $var += $jarak;
