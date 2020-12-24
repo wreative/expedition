@@ -8,6 +8,15 @@
     {{ __('Refrensi nomor resi yang saat ini digunakan') }}
 </p> --}}
 @include('pages.backend.data.components.wizard')
+@if (Session::has('status'))
+<div class="alert alert-danger alert-has-icon">
+    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+    <div class="alert-body">
+        <div class="alert-title">{{ __('Error') }}</div>
+        {{ Session::get('status') }}
+    </div>
+</div>
+@endif
 <form method="POST" action="{{ route('store2') }}">
     @csrf
     @include('pages.backend.data.components.resi')

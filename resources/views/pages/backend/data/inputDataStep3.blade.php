@@ -121,7 +121,7 @@
                 <tbody>
                     <tr>
                         <th>{{ __('Biaya Kirim') }}</th>
-                        <td class="text-right">{{ Session::get('bk') }}</td>
+                        <td class="text-right">{{ __('Rp.').number_format(Session::get('bk')) }}</td>
                         <input type="hidden" value="{{ Session::get('bk') }}" name="bk">
                     </tr>
                     <tr>

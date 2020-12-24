@@ -88,6 +88,10 @@ class InputController extends Controller
         // $replaced = Str::replaceLast('CA', $codeArea, $resi);
         // $resi = Str::replaceLast('CKO', $codeKota, $replaced);
 
+        if ($req->service != '2') {
+            return Redirect::route('inputData')->with(['available' => 'Layanan ini belum ada']);
+        }
+
         $this->validate($req, [
             'sender_name' => 'required',
             'sender_tlp' => 'required',
@@ -233,15 +237,46 @@ class InputController extends Controller
 
         // dd($req->jb->name);
 
+        // Get Destination
+        $destination = DB::table('wilayah')->select('id', 'name')->where('id', '=', $req->destination)->get();
+
+        // Return page
+        $backAgain = Redirect::route('inputData2')->with([
+            'sender_name' => $req->sender_name,
+            'sender_tlp' => $req->sender_tlp,
+            'sender_addr' => $req->sender_addr,
+            'receiver_name' => $req->receiver_name,
+            'receiver_tlp' => $req->receiver_tlp,
+            'receiver_addr' => $req->receiver_addr,
+            'office_addr' => $req->office_addr,
+            'office_tlp' => $req->office_tlp,
+            'office_pst' => $req->office_pst,
+            'note' => $req->note,
+            'vol_darat' => $req->vol_darat,
+            'vol_udara' => $req->vol_udara,
+            'berat' => $req->berat,
+            'amount' => $req->amount,
+            'service' => $req->service,
+            'payment' => $req->payment,
+            'destination' => $req->destination,
+        ])->with(['status' => 'Layanan ini belum ada']);
+
+        // Parcel Only Regular
+        if ($req->lp != 1 && $req->jb == 3) {
+            return $backAgain;
+        } elseif ($req->lp != 1 && $req->jb == 2 && $this->removeComma($req->doc) >= 500) {
+            return $backAgain;
+        }
 
         // Biaya Kirim
         $bk = $this->CityCourierController->initial(
             $this->multipleData('jenis_barang', $req->jb)->name,
-            $req->lp,
+            $req->lp, // 3 Layanan Pengiriman
             $this->removeComma($req->doc),
             $req->par,
             $req->berat,
-            $req->amount
+            $req->amount,
+            $req->destination
         );
 
         // dd($bk);

@@ -8,19 +8,20 @@ use Illuminate\Support\Facades\Redirect;
 
 class CityCourierController extends Controller
 {
-    public function initial($jenis, $layanan, $doc, $par, $berat, $amount)
+    public function initial($jenis, $layanan, $doc, $par, $berat, $amount, $destination)
     {
         if ($jenis == 'Dokumen') {
-            return $this->dokumen($layanan, $doc);
+            return $this->dokumen($layanan, $doc, $destination);
         } else if ($jenis == 'Parcel') {
-            return $this->parcel($layanan, $par);
+            return $this->parcel($layanan, $par, $destination);
         } else if ($jenis == 'Paket') {
-            return $this->paket($layanan, $berat);
+            return $this->paket($layanan, $berat, $destination);
         }
     }
 
-    function paket($layanan, $berat)
+    function paket($layanan, $berat, $destination)
     {
+        // if ($destination == '1') {
         switch ($layanan) {
             case 1:
                 return $this->paketFormula(5, $berat, 7000, 5000);
@@ -29,17 +30,38 @@ class CityCourierController extends Controller
             case 3:
                 return $this->paketFormula(5, $berat, 20000, 8000);
         }
+        // } else {
+        //     switch ($layanan) {
+        //         case 1:
+        //             return $this->paketFormula(5, $berat, 12000, 7000);
+        //         case 2:
+        //             return $this->paketFormula(5, $berat, 17000, 8000);
+        //         case 3:
+        //             return $this->paketFormula(5, $berat, 25000, 10000);
+        //     }
+        // }
     }
 
-    public function dokumen($layanan, $doc)
+    public function dokumen($layanan, $doc, $destination)
     {
-        switch ($layanan) {
-            case 1:
-                return $doc >= 500 ? 2500 : 3000;
-            case 2:
-                return $doc >= 500 ? 0 : 5000;
-            case 3:
-                return $doc >= 500 ? 0 : 10000;
+        if ($destination == 1) { // Destination
+            switch ($layanan) { // Layanan Pengiriman
+                case 1:
+                    return $doc >= 500 ? 2500 : 3000;
+                case 2:
+                    return $doc >= 500 ? 0 : 5000;
+                case 3:
+                    return $doc >= 500 ? 0 : 10000;
+            }
+        } else {
+            switch ($layanan) { // Layanan Pengiriman
+                case 1:
+                    return $doc >= 500 ? 3500 : 5000;
+                case 2:
+                    return $doc >= 500 ? 0 : 10000;
+                case 3:
+                    return $doc >= 500 ? 0 : 20000;
+            }
         }
     }
 
@@ -51,19 +73,40 @@ class CityCourierController extends Controller
     {
     }
 
-    function parcel($layanan, $par)
+    function parcel($layanan, $par, $destination)
     {
-        if ($layanan == 1) {
-            switch ($par) {
+        if ($destination == 1) { // Destination
+            switch ($layanan) { // Layanan Pengiriman
                 case 1:
-                    return 15000;
+                    switch ($par) { // Type Parcel
+                        case 1:
+                            return 15000;
+                        case 2:
+                            return 20000;
+                        case 3:
+                            return 30000;
+                    }
                 case 2:
-                    return 20000;
+                    return 0;
                 case 3:
-                    return 30000;
+                    return 0;
             }
         } else {
-            return '0';
+            switch ($layanan) {
+                case 1:
+                    switch ($par) {
+                        case 1:
+                            return 20000;
+                        case 2:
+                            return 25000;
+                        case 3:
+                            return 35000;
+                    }
+                case 2:
+                    return 0;
+                case 3:
+                    return 0;
+            }
         }
     }
 
