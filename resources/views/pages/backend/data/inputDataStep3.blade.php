@@ -126,22 +126,22 @@
                     </tr>
                     <tr>
                         <th>{{ __('Biaya Potong') }}</th>
-                        <td class="text-right">{{ Session::get('vol_udara').__('Kg') }}</td>
-                        <input type="hidden" value="{{ Session::get('bpo') }}" name="bpo">
+                        <td class="text-right">{{ __('0') }}</td>
+                        <input type="hidden" value="{{ __('0') }}" name="bpo">
                     </tr>
                     <tr>
                         <th>{{ __('Biaya Packing') }}</th>
-                        <td class="text-right">{{ Session::get('service')->name }}</td>
-                        <input type="hidden" value="{{ Session::get('bpa') }}" name="bpa">
+                        <td class="text-right">{{ __('0') }}</td>
+                        <input type="hidden" value="{{ __('0') }}" name="bpa">
                     </tr>
                     <tr>
                         <th>{{ __('Biaya Lain') }}</th>
-                        <td class="text-right">{{ Session::get('payment')->name }}</td>
-                        <input type="hidden" value="{{ Session::get('bl') }}" name="bl">
+                        <td class="text-right">{{ __('0') }}</td>
+                        <input type="hidden" value="{{ __('0') }}" name="bl">
                     </tr>
                     <tr>
                         <th>{{ __('Total Biaya') }}</th>
-                        <td class="text-right">{{ __('Surabaya') }}</td>
+                        <td class="text-right">{{ __('Rp.').number_format(Session::get('tb')) }}</td>
                         <input type="hidden" value="{{ Session::get('tb') }}" name="tb">
                     </tr>
                 </tbody>

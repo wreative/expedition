@@ -281,7 +281,7 @@ class InputController extends Controller
 
         // dd($bk);
 
-        //TODO: Layanan Tidak ada
+        $tb = $bk;
 
 
         return Redirect::route('inputData3')->with([
@@ -306,7 +306,8 @@ class InputController extends Controller
             'lp' => $req->lp,
             'doc' => $req->doc,
             'par' => $req->par,
-            'bk' => $bk
+            'bk' => $bk,
+            'tb' => $tb
             // Has Status
             // 'jenis' => $req->jenis
         ]);
